@@ -476,3 +476,102 @@ main { padding-top: 20px; }
   .mini-action { width: 21px; }
 }
 
+/* 温柔手账细节：柔和纸感、植物绿和更舒适的触控空间 */
+:root {
+  --paper: #f7f4ec;
+  --paper-deep: #eee8da;
+  --ink: #28372e;
+  --muted: #89877d;
+  --line: #e7e0d2;
+  --green: #628b70;
+  --green-dark: #3d674d;
+  --green-pale: #e9f1e7;
+  --gold: #c5a36e;
+  --white: #fffdf8;
+  --shadow: 0 12px 34px rgba(65, 66, 49, .07);
+}
+body {
+  background-image:
+    radial-gradient(ellipse at 88% 8%, rgba(193, 173, 129, .11), transparent 29rem),
+    radial-gradient(ellipse at 6% 39%, rgba(123, 153, 119, .075), transparent 25rem),
+    radial-gradient(circle at 17% 21%, rgba(116, 96, 66, .04) 0 1px, transparent 1.2px),
+    repeating-linear-gradient(0deg, rgba(118, 103, 76, .012) 0 1px, transparent 1px 4px);
+  background-size: auto, auto, 11px 11px, auto;
+  background-attachment: fixed;
+}
+.app-frame { width: min(1000px, calc(100% - 48px)); }
+.topbar { height: 74px; border-color: rgba(112, 99, 73, .15); }
+.brand { gap: 9px; }
+.brand-mark { width: 38px; height: 38px; border-radius: 12px; background: #e8efe4; color: #5f866b; }
+.brand-mark svg { width: 27px; height: 27px; }
+.brand-copy strong { color: #304335; font-size: 18px; letter-spacing: .08em; }
+.brand-copy small { color: #979183; font-size: 9px; }
+.topbar-date { min-height: 31px; border: 1px solid rgba(137, 126, 100, .13); border-radius: 20px; background: rgba(255, 253, 248, .7); padding: 0 11px; }
+main { padding-top: 22px; }
+.welcome-card h1 { font-size: clamp(43px, 5.2vw, 60px); line-height: 1.23; letter-spacing: .005em; }
+.welcome-subtitle { color: #817f74; font-size: 13px; }
+.welcome-date { color: #928d7e; }
+.botanical-right { opacity: .86; }
+.botanical-left { opacity: .28; }
+.compose-card { border-radius: 19px; background: rgba(255, 253, 248, .94); padding: 24px 23px 19px; }
+.card-heading h2, .section-heading h2, .selected-day-card h2 { color: #304237; }
+.mood-picker { gap: 7px; padding-top: 16px; }
+.mood-option { min-height: 61px; border: 1px solid rgba(127, 143, 119, .08); border-radius: 13px; background: #f7f5ef; }
+.mood-option.is-selected { border-color: #a7c0a8; background: linear-gradient(145deg, #f1f6ed, #e6f0e5); box-shadow: 0 4px 12px rgba(85, 126, 91, .09); }
+.quick-input { border-color: #e7e2d7; border-radius: 12px; background: rgba(255, 255, 255, .84); font-size: 13px; }
+.button-primary { background: linear-gradient(135deg, #70a584, #54836a); box-shadow: 0 6px 15px rgba(70, 118, 83, .2); }
+.button-primary:hover { background: linear-gradient(135deg, #5f9775, #3e6d53); }
+.stat-row { border-radius: 16px; background: rgba(255, 253, 248, .8); }
+.stat-item strong { color: #3e634b; }
+.feed-section { padding-top: 32px; }
+.section-heading { margin-bottom: 15px; }
+.section-heading .eyebrow { color: #a09378; }
+.timeline-toolbar { min-height: 44px; border: 0; border-radius: 12px; background: linear-gradient(115deg, #88c6a7, #6eae8f); box-shadow: 0 5px 13px rgba(83, 139, 107, .12); padding: 5px 11px; }
+.timeline-filter select { font-size: 12px; }
+.recent-recall { border: 1px solid rgba(119, 157, 123, .13); border-radius: 12px; background: rgba(232, 243, 235, .82); font-size: 11px; }
+.entry-list { gap: 13px; }
+.entry-card { border-color: rgba(128, 112, 82, .13); border-radius: 14px; background: rgba(255, 254, 250, .94); box-shadow: 0 5px 17px rgba(78, 69, 48, .045); padding: 15px 15px; }
+.entry-card:hover { box-shadow: 0 10px 24px rgba(78, 69, 48, .085); }
+.entry-datebox { color: #908d80; }
+.entry-datebox strong { color: #47684e; }
+.entry-title { color: #304237; font-size: 15px; }
+.entry-copy { color: #696c62; font-size: 12px; }
+.entry-photos { gap: 6px; margin-top: 11px; border-radius: 10px; }
+.entry-photo { border-radius: 8px; background: #e9e3d6; }
+.entry-place, .entry-weather { color: #718c77; }
+.entry-category { border: 1px solid rgba(114, 153, 117, .12); background: #edf4ea; color: #648369; }
+.entry-tag { background: #f4f0e7; }
+.bottom-nav { border: 1px solid rgba(130, 133, 111, .17); border-radius: 20px; background: rgba(255, 253, 248, .93); box-shadow: 0 10px 30px rgba(64, 65, 51, .14); backdrop-filter: blur(16px); }
+.nav-item { min-height: 48px; }
+.nav-item.is-active { color: #4f8565; }
+.floating-add { border: 2px solid rgba(255, 253, 248, .9); background: linear-gradient(140deg, #92d4b3, #70bd98); box-shadow: 0 9px 24px rgba(69, 134, 101, .31); color: #31533d; }
+.entry-dialog { border: 1px solid #e7decf; border-radius: 20px; box-shadow: 0 20px 70px rgba(39, 44, 34, .22); }
+.photo-dropzone { border-radius: 13px; background: #f4f7ef; }
+
+@media (max-width: 760px) {
+  .app-frame { width: min(100%, 620px); padding-right: 15px; padding-left: 15px; }
+  .topbar { height: calc(58px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); }
+  main { padding-top: 0; }
+  #screen-today .welcome-card { min-height: 231px; padding: 21px 3px 10px; }
+  #screen-today .welcome-card h1 { font-size: clamp(36px, 10vw, 44px); line-height: 1.25; }
+  #screen-today .welcome-subtitle { font-size: 11px; }
+  .topbar-date { padding: 0 9px; }
+  .compose-card { border-radius: 17px; }
+  .mood-option { min-height: 57px; }
+  .timeline-toolbar { border-radius: 11px; }
+  .entry-card { border-radius: 13px; }
+  .entry-title { font-size: 13px; }
+  .entry-copy { font-size: 10.5px; }
+  .entry-photos { gap: 5px; }
+  .entry-photo { border-radius: 6px; }
+  .bottom-nav { bottom: calc(10px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 365px) {
+  .app-frame { padding-right: 12px; padding-left: 12px; }
+  .welcome-card h1 { font-size: 35px; }
+  .mood-picker { gap: 4px; }
+  .mood-option { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .entry-card, .entry-photo img, .floating-add, .button { transition: none; }
+}

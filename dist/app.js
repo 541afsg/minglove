@@ -644,8 +644,9 @@
   $("#import-data").addEventListener("click", () => $("#import-file").click());
   $("#import-file").addEventListener("change", (event) => { const [file] = event.target.files || []; if (file) importBackup(file); });
   const installButton = $("#install-app");
+  const isNativeApp = Boolean(window.Capacitor?.isNativePlatform?.());
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-  installButton.hidden = !/android/i.test(navigator.userAgent) || isStandalone;
+  installButton.hidden = isNativeApp || !/android/i.test(navigator.userAgent) || isStandalone;
   window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault();
     deferredInstallPrompt = event;
@@ -667,6 +668,5 @@
 
   renderAll();
   Promise.resolve(navigator.storage?.persist?.()).catch(() => {});
-  if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
+  if (!isNativeApp && "serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
 })();
-

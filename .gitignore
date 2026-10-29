@@ -2,6 +2,7 @@
 .env
 .env.*
 node_modules/
+android/
+assets/*.png
 Thumbs.db
 Desktop.ini
-

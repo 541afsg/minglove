@@ -1,0 +1,8 @@
+{
+  "appId": "com.shiguangbiji.app",
+  "appName": "拾光笔记",
+  "webDir": "dist",
+  "android": {
+    "backgroundColor": "#f5f1e7"
+  }
+}
