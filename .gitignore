@@ -1,0 +1,7 @@
+.openai/
+.env
+.env.*
+node_modules/
+Thumbs.db
+Desktop.ini
+
