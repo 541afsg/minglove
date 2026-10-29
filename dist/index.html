@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f1e7" />
+    <meta name="description" content="拾光笔记：把生活里的文字、照片和心情，留给自己。" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>拾光笔记 · 把生活留给自己</title>
+  </head>
+  <body>
+    <div class="app-frame">
+      <header class="topbar">
+        <a class="brand" href="#today" aria-label="拾光日记首页">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 4.5c1.3 7.1 4.8 10.6 12 12-7.2 1.4-10.7 4.9-12 12-1.4-7.1-4.9-10.6-12-12 7.1-1.4 10.6-4.9 12-12Z" fill="currentColor"/><circle cx="30.5" cy="30.5" r="3.5" fill="currentColor" opacity=".48"/></svg>
+          </span>
+          <span class="brand-copy"><strong>拾光笔记</strong><small>把生活留给自己</small></span>
+        </a>
+        <div class="topbar-date"><span class="status-dot"></span><span id="top-date">今天</span></div>
+      </header>
+
+      <main>
+        <section class="screen is-active" id="screen-today" data-screen="today" aria-labelledby="welcome-title">
+          <div class="today-grid">
+            <section class="welcome-card">
+              <div class="welcome-art" aria-hidden="true"><span class="sun-disc"></span><svg class="botanical botanical-right" viewBox="0 0 180 250" fill="none"><path d="M116 245C103 176 116 113 161 28" stroke="#748767" stroke-width="2"/><path d="M127 189C91 173 78 153 76 128C105 139 122 158 127 189Z" fill="#879879"/><path d="M137 151C155 128 160 104 152 80C131 99 126 122 137 151Z" fill="#a2ad8c"/><path d="M146 112C119 94 108 73 113 49C137 61 149 82 146 112Z" fill="#768969"/><path d="M151 79C165 62 169 44 162 25" stroke="#748767" stroke-width="1.5"/><g fill="#fbf8ef" stroke="#d6c9a7" stroke-width="1"><circle cx="158" cy="35" r="11"/><circle cx="158" cy="35" r="4" fill="#d6b87c"/><circle cx="133" cy="58" r="8"/><circle cx="133" cy="58" r="3" fill="#d6b87c"/></g></svg><svg class="botanical botanical-left" viewBox="0 0 140 190" fill="none"><path d="M8 186C44 137 63 82 72 20" stroke="#718365" stroke-width="2"/><path d="M33 147C12 124 8 103 17 82C36 99 42 120 33 147Z" fill="#8c9979"/><path d="M50 112C79 99 93 80 94 57C68 68 53 86 50 112Z" fill="#a5ad91"/><path d="M63 73C43 57 37 40 44 22C63 34 70 51 63 73Z" fill="#728565"/></svg></div>
+              <div class="welcome-content">
+                <p class="eyebrow"><span class="tiny-spark">✳</span> 留给自己的生活档案</p>
+                <h1 id="welcome-title">把生活，<br /><em>留一份给自己。</em></h1>
+                <p class="welcome-subtitle">文字、照片和心情，都有迹可循。</p>
+                <div class="welcome-date"><span class="date-rule"></span><span id="hero-date">今天</span><span class="date-rule"></span></div>
+              </div>
+              <div class="welcome-footer"><span>慢一点，感受生活</span><button class="install-button" type="button" id="install-app"><span aria-hidden="true">＋</span> 添加到手机桌面</button></div>
+            </section>
+
+            <section class="compose-card" aria-labelledby="compose-title">
+              <div class="card-heading">
+                <div><p class="eyebrow">A MOMENT FOR YOU</p><h2 id="compose-title">此刻的心情</h2></div>
+                <span class="heading-mark" aria-hidden="true">✳</span>
+              </div>
+              <div class="mood-picker" id="today-moods" role="radiogroup" aria-label="选择今天的心情">
+                <button class="mood-option" type="button" data-mood="happy" aria-pressed="false"><span class="mood-face">☀️</span><span>开心</span></button>
+                <button class="mood-option" type="button" data-mood="calm" aria-pressed="false"><span class="mood-face">🌿</span><span>平静</span></button>
+                <button class="mood-option" type="button" data-mood="full" aria-pressed="false"><span class="mood-face">✨</span><span>充实</span></button>
+                <button class="mood-option" type="button" data-mood="tired" aria-pressed="false"><span class="mood-face">☁️</span><span>疲惫</span></button>
+                <button class="mood-option" type="button" data-mood="low" aria-pressed="false"><span class="mood-face">🌧️</span><span>低落</span></button>
+              </div>
+              <label class="sr-only" for="quick-content">写下今天的一件小事</label>
+              <textarea id="quick-content" class="quick-input" rows="4" placeholder="今天有什么小事，让你想记下来？"></textarea>
+              <div class="compose-actions"><button class="text-button" type="button" id="open-editor"><span aria-hidden="true">＋</span> 添加标题和分类</button><button class="button button-primary" type="button" id="quick-save">收好这一刻 <span aria-hidden="true">↗</span></button></div>
+              <p class="local-note"><span aria-hidden="true">◈</span> 只保存在这台设备的浏览器里</p>
+            </section>
+          </div>
+
+          <section class="stat-row" aria-label="记录概览">
+            <div class="stat-item"><span class="stat-icon">✦</span><span class="stat-label">已收集的日子</span><strong id="stat-total">0 <small>篇</small></strong></div>
+            <span class="stat-divider"></span>
+            <div class="stat-item"><span class="stat-icon">◷</span><span class="stat-label">这个月</span><strong id="stat-month">0 <small>篇</small></strong></div>
+            <span class="stat-divider"></span>
+            <div class="stat-item"><span class="stat-icon">↟</span><span class="stat-label">连续记录</span><strong id="stat-streak">0 <small>天</small></strong></div>
+          </section>
+
+          <section class="feed-section">
+            <div class="section-heading"><div><p class="eyebrow">LITTLE MOMENTS</p><h2>把日子放在这里 <span class="soft-count" id="today-count">0</span></h2></div><button class="plain-link" type="button" data-nav="history">我的拾光 <span aria-hidden="true">→</span></button></div>
+            <div class="timeline-toolbar"><label class="timeline-filter"><span aria-hidden="true">▾</span><select id="timeline-category" aria-label="筛选记录分类"><option value="all">全部记录</option><option value="日常">日常</option><option value="心情">心情</option><option value="灵感">灵感</option><option value="重要时刻">重要时刻</option></select></label><input class="timeline-search" id="timeline-search" type="search" placeholder="搜索记录" aria-label="搜索记录" hidden /><button class="timeline-search-button" type="button" id="timeline-search-toggle" aria-label="打开搜索">⌕</button></div>
+            <div class="recent-recall" id="recent-recall"><span class="recall-mark" aria-hidden="true">◷</span><span id="recent-recall-text">最近的日子，值得回看。</span><button type="button" id="dismiss-recall" aria-label="收起近期回顾提示">×</button></div>
+            <div id="today-list" class="entry-list"></div>
+          </section>
+        </section>
+
+        <section class="screen" id="screen-calendar" data-screen="calendar" aria-labelledby="calendar-title" hidden>
+          <div class="page-heading"><div><p class="eyebrow">YOUR DAYS, AT A GLANCE</p><h1 id="calendar-title">日历回看</h1><p class="page-subtitle">每个小点，都是你认真生活过的证据。</p></div><span class="page-ornament" aria-hidden="true">✳</span></div>
+          <div class="calendar-layout">
+            <section class="calendar-card" aria-label="月历">
+              <div class="calendar-monthbar"><button class="icon-button" type="button" id="month-prev" aria-label="上个月">‹</button><h2 id="calendar-month">2026年10月</h2><button class="icon-button" type="button" id="month-next" aria-label="下个月">›</button><button class="today-shortcut" type="button" id="month-today">回到今天</button></div>
+              <div class="calendar-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+              <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="日历日期"></div>
+              <div class="calendar-legend"><span class="legend-dot"></span> 有记录的日子</div>
+            </section>
+            <section class="selected-day-card"><div class="selected-date-label">这一天</div><h2 id="selected-date-title">选择一个日期</h2><div id="calendar-day-list" class="entry-list compact-list"></div></section>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-history" data-screen="history" aria-labelledby="history-title" hidden>
+          <div class="page-heading history-heading"><div><p class="eyebrow">A COLLECTION OF YOU</p><h1 id="history-title">我的拾光</h1><p class="page-subtitle">所有平凡又珍贵的日子，都在这里。</p></div><span class="page-ornament" aria-hidden="true">❋</span></div>
+          <section class="history-tools">
+            <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">搜索记录</span><input id="history-search" type="search" placeholder="搜一搜关键词、标题或标签" autocomplete="off" /></label>
+            <div class="history-actions"><button class="button button-secondary" type="button" id="export-data"><span aria-hidden="true">↓</span> 导出备份</button><button class="button button-secondary" type="button" id="import-data"><span aria-hidden="true">↑</span> 导入备份</button><input type="file" id="import-file" accept="application/json,.json" hidden /></div>
+          </section>
+          <div class="filter-row" id="category-filters" aria-label="按分类筛选">
+            <button class="filter-chip is-selected" type="button" data-category="all">全部</button><button class="filter-chip" type="button" data-category="日常">日常</button><button class="filter-chip" type="button" data-category="心情">心情</button><button class="filter-chip" type="button" data-category="灵感">灵感</button><button class="filter-chip" type="button" data-category="重要时刻">重要时刻</button>
+          </div>
+          <div class="history-summary" id="history-summary">还没有记录</div>
+          <div id="history-list" class="entry-list history-list"></div>
+          <p class="backup-note"><span aria-hidden="true">◈</span> 文字和照片保存在这台手机的浏览器中。定期导出备份，换设备时可以再导入。</p>
+        </section>
+      </main>
+
+      <button class="floating-add" id="floating-add" type="button" aria-label="新建生活记录">＋</button>
+      <nav class="bottom-nav" aria-label="主导航">
+        <button class="nav-item is-active" type="button" data-nav="today" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span><span>记录</span></button>
+        <button class="nav-item" type="button" data-nav="calendar"><span class="nav-icon" aria-hidden="true">▦</span><span>日历</span></button>
+        <button class="nav-add" type="button" id="nav-add" aria-label="新建记录"><span aria-hidden="true">＋</span></button>
+        <button class="nav-item" type="button" data-nav="history"><span class="nav-icon" aria-hidden="true">◎</span><span>我的</span></button>
+        <span class="nav-spacer" aria-hidden="true"></span>
+      </nav>
+    </div>
+
+    <dialog id="entry-dialog" class="entry-dialog" aria-labelledby="dialog-title">
+      <form id="entry-form" class="entry-form">
+        <div class="dialog-heading"><div><p class="eyebrow">SAVE THIS MOMENT</p><h2 id="dialog-title">记下这一刻</h2></div><button class="icon-button dialog-close" type="button" data-close-dialog aria-label="关闭">×</button></div>
+        <div class="form-row"><label class="field-label" for="entry-date">日期</label><input id="entry-date" name="date" type="date" required /></div>
+        <div class="form-row"><label class="field-label" for="entry-title">给这段记忆起个名字 <span>可选</span></label><input id="entry-title" name="title" type="text" maxlength="80" placeholder="例如：晚风里的散步" /></div>
+        <div class="form-row"><label class="field-label" for="entry-content">写下发生了什么 <span>必填</span></label><textarea id="entry-content" name="content" rows="5" maxlength="5000" placeholder="小小的事情也值得被认真记住……" required></textarea></div>
+        <div class="form-grid"><div class="form-row"><label class="field-label" for="entry-category">分类</label><select id="entry-category" name="category"><option>日常</option><option>心情</option><option>灵感</option><option>重要时刻</option></select></div><div class="form-row"><label class="field-label" for="entry-mood">心情</label><select id="entry-mood" name="mood"><option value="">暂不选择</option><option value="happy">开心 ☀️</option><option value="calm">平静 🌿</option><option value="full">充实 ✨</option><option value="tired">疲惫 ☁️</option><option value="low">低落 🌧️</option></select></div></div>
+        <div class="form-row"><label class="field-label" for="entry-tags">标签 <span>用逗号分开</span></label><input id="entry-tags" name="tags" type="text" maxlength="120" placeholder="散步，家人，周末" /></div>
+        <div class="form-grid"><div class="form-row"><label class="field-label" for="entry-place">地点 <span>可选</span></label><input id="entry-place" name="place" type="text" maxlength="60" placeholder="例如：杭州 · 西湖" /></div><div class="form-row"><label class="field-label" for="entry-weather">天气 <span>可选</span></label><select id="entry-weather" name="weather"><option value="">暂不选择</option><option value="晴">晴 ☀️</option><option value="多云">多云 ⛅</option><option value="阴">阴 ☁️</option><option value="雨">雨 🌧️</option><option value="雪">雪 ❄️</option></select></div></div>
+        <div class="form-row photo-field"><span class="field-label">照片 <span>最多 6 张，自动压缩</span></span><label class="photo-dropzone" for="entry-photos"><span class="photo-drop-icon" aria-hidden="true">＋</span><span><strong>添加生活照片</strong><small>从相册选择，也可以直接拍摄</small></span><input id="entry-photos" name="photos" type="file" accept="image/*" capture="environment" multiple /></label><div class="photo-preview" id="photo-preview"></div></div>
+        <div class="dialog-actions"><button class="button button-secondary" type="button" data-close-dialog>先不记了</button><button class="button button-primary" type="submit">保存这段记忆 <span aria-hidden="true">↗</span></button></div>
+      </form>
+    </dialog>
+    <dialog id="photo-viewer" class="photo-viewer" aria-label="照片预览"><button type="button" class="photo-viewer-close" id="close-photo-viewer" aria-label="关闭照片预览">×</button><img id="photo-viewer-image" alt="记录中的生活照片" /></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
+
