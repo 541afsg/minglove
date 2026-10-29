@@ -20,6 +20,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -34,7 +36,7 @@ jobs:
           node-version: "24"
           cache: npm
       - name: Install Android platform
-        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
+        run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
       - name: Install JavaScript dependencies
         run: npm ci
       - name: Prepare Android app icons
