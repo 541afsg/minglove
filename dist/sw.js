@@ -1,4 +1,4 @@
-const CACHE_NAME = "shiguang-shell-v2";
+const CACHE_NAME = "shiguang-shell-v3";
 const SHELL = ["./", "./index.html", "./app.css", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
@@ -29,4 +29,3 @@ self.addEventListener("fetch", (event) => {
     return response;
   })));
 });
-
