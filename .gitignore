@@ -3,6 +3,8 @@
 .env.*
 node_modules/
 android/
+signing/
+*.jks
 assets/*.png
 Thumbs.db
 Desktop.ini

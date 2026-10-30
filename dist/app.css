@@ -695,6 +695,12 @@ main { padding-top: 22px; }
 .let-go-result { white-space:pre-line; border-radius:12px; background:#edf3e8; padding:13px; color:#557057; font-size:11px; line-height:1.8; }
 .sport-metrics { margin-top:10px; }
 .sport-metrics input { width:100%; }
+.takeaway-intro, .takeaway-empty { margin:0 0 12px; color:#8a8b80; font-size:11px; line-height:1.7; }
+.takeaway-day { display:grid; grid-template-columns:94px minmax(0,1fr); gap:12px; border-top:1px solid #efede5; padding:11px 2px; }
+.takeaway-day:first-child { border-top:0; padding-top:2px; }
+.takeaway-day time { color:#80917a; font-size:10px; line-height:1.7; }
+.takeaway-day ul { display:grid; gap:7px; margin:0; padding-left:18px; color:#5d6b5d; font-size:11px; line-height:1.7; }
+.takeaway-day li::marker { color:#94b18d; }
 #work-form[hidden], .sport-metrics[hidden] { display:none; }
 .nav-item { flex:1; width:auto; }
 .nav-add { flex:none; }
@@ -732,6 +738,7 @@ main { padding-top: 22px; }
   .activity-title-row h3 { font-size:12px; }
   .activity-tools { flex-direction:column; }
   .weekly-grid { grid-template-columns:1fr; }
+  .takeaway-day { grid-template-columns:78px minmax(0,1fr); gap:8px; }
   .pool-list { grid-template-columns:1fr; gap:11px; }
   .todo-form { grid-template-columns:1fr; }
   .pool-form { grid-template-columns:100px minmax(0,1fr) auto; }

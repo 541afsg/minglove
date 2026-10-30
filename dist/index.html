@@ -35,6 +35,7 @@
             <form id="work-form">
               <input id="work-date" type="date" aria-label="工作记录日期" required />
               <label class="field-label" for="work-good">今天哪里比较顺？<span>可选</span></label><textarea id="work-good" rows="2" maxlength="1200" placeholder="一件做得不错的事就够了"></textarea>
+              <label class="field-label" for="work-takeaway">今天工作中的收获<span>选填 · 每行一条</span></label><textarea id="work-takeaway" rows="3" maxlength="1600" placeholder="例如：弄清了一个流程；和同事沟通更顺了&#10;保存后会自动逐条汇总到“回顾 → 工作收获”"></textarea>
               <label class="field-label" for="work-stress">哪里让我烦、累或焦虑？<span>可选</span></label><textarea id="work-stress" rows="2" maxlength="1200" placeholder="可以先写关键词"></textarea>
               <label class="work-check"><input id="work-has-blocker" type="checkbox" /> 今天有还卡着的事</label>
               <div id="work-blocker-fields" hidden>
@@ -121,6 +122,7 @@
         <section class="screen" id="screen-history" data-screen="history" aria-labelledby="history-title" hidden>
           <div class="page-heading history-heading"><div><p class="eyebrow">A COLLECTION OF YOUR DAYS</p><h1 id="history-title">时光回顾</h1><p class="page-subtitle">工作和生活各自留痕，在每周回顾里再轻轻看一眼。</p></div><span class="page-ornament" aria-hidden="true">❋</span></div>
           <section class="weekly-card" id="weekly-summary"><p class="eyebrow">A GENTLE WEEKLY RECAP</p><h2 id="weekly-title">这一周</h2><div id="weekly-content"></div></section>
+          <section class="weekly-card work-takeaway-panel" id="work-takeaway-panel"><p class="eyebrow">SMALL WINS AT WORK</p><h2>工作收获</h2><p class="takeaway-intro">工作页写下的收获会自动汇总在这里，每一条都带着日期，方便以后回看。</p><div id="work-takeaway-list"></div></section>
           <div class="review-calendar-slot" id="review-calendar-slot"></div>
           <section class="history-tools">
             <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">搜索记录</span><input id="history-search" type="search" placeholder="搜一搜关键词、标题或标签" autocomplete="off" /></label>

@@ -14,7 +14,7 @@
     安静: ["临帖 / 写字", "听歌", "看小说", "看电影", "咖啡店坐坐", "简单整理"],
     身体活动: ["散步", "快走", "跑步", "健身", "羽毛球", "篮球", "骑车"],
     社交: ["桌游", "找朋友吃饭", "聊天", "同事活动", "临时约人"],
-    放松: ["按摩 / 足疗", "洗澡", "慢慢吃顿喜欢的", "躺一会儿"],
+    放松: ["洗澡", "慢慢吃顿喜欢的", "躺一会儿"],
     探索: ["去没去过的公园", "城市闲逛", "看展", "Livehouse", "随便出去转转"],
   };
   const GROUPS = Object.keys(POOL_DEFAULTS);
@@ -22,6 +22,7 @@
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const clone = (value) => JSON.parse(JSON.stringify(value));
   const escapeHTML = (value) => String(value == null ? "" : value).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const takeawayItems = (value) => String(value || "").split(/\r?\n/).map((line) => line.replace(/^\s*(?:[-*•]\s*|\d+[.、]\s*)/, "").trim()).filter(Boolean).slice(0, 30);
   const makeId = () => globalThis.crypto && crypto.randomUUID ? crypto.randomUUID() : "sg-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
   const todayKey = () => {
     const d = new Date();
@@ -126,6 +127,7 @@
       date: date,
       mood: selectedWorkMood,
       good: $("#work-good").value.trim(),
+      takeaway: $("#work-takeaway").value.trim().slice(0, 1600),
       stress: $("#work-stress").value.trim(),
       hasBlocker: hasBlocker,
       blocker: hasBlocker ? $("#work-blocker").value.trim() : "",
@@ -143,6 +145,7 @@
   function makeClosure(item) {
     const parts = [];
     if (item.good) parts.push("今天比较顺的是：" + item.good + "。");
+    takeawayItems(item.takeaway).forEach((line) => parts.push("今天的工作收获：" + line + "。"));
     if (item.hasBlocker && item.blocker) parts.push("当前卡点：" + item.blocker + "。");
     if (item.hasBlocker && item.next) parts.push("下一步：" + item.next + (item.nextWhen ? "，" + item.nextWhen + "再处理。" : "。"));
     if (!item.hasBlocker) parts.push("今天没有需要带走的卡点。");
@@ -153,7 +156,7 @@
     const date = $("#work-date").value || todayKey();
     if (!validDateKey(date)) { showToast("请选择有效日期。"); return null; }
     const item = readWorkForm(closed);
-    const hasContent = item.mood || item.good || item.stress || item.hasBlocker;
+    const hasContent = item.mood || item.good || item.takeaway || item.stress || item.hasBlocker;
     if (!hasContent) {
       if (!quiet) showToast("先选个状态，或写下一件今天发生的事。");
       return null;
@@ -169,6 +172,7 @@
     $("#work-date").value = item ? item.date : todayKey();
     setSelectedMood(item ? item.mood : "");
     $("#work-good").value = item ? item.good || "" : "";
+    $("#work-takeaway").value = item ? item.takeaway || "" : "";
     $("#work-stress").value = item ? item.stress || "" : "";
     $("#work-has-blocker").checked = Boolean(item && item.hasBlocker);
     $("#work-blocker").value = item ? item.blocker || "" : "";
@@ -207,7 +211,7 @@
   function queueWorkSave() {
     clearTimeout(workSaveTimer);
     workSaveTimer = setTimeout(() => {
-      const hasContent = selectedWorkMood || $("#work-good").value.trim() || $("#work-stress").value.trim() || $("#work-has-blocker").checked;
+      const hasContent = selectedWorkMood || $("#work-good").value.trim() || $("#work-takeaway").value.trim() || $("#work-stress").value.trim() || $("#work-has-blocker").checked;
       if (hasContent && validDateKey($("#work-date").value)) persistWork(false, true);
     }, 450);
   }
@@ -430,6 +434,7 @@
     const within = (item) => item.date >= startKey && item.date <= endKey;
     const weekActivities = activities.filter(within);
     const weekWork = workLogs.filter(within);
+    renderWorkTakeaways();
     const highlights = weekActivities.filter((item) => ["开心", "放松", "很充实", "有活力", "自由自在"].includes(item.feeling)).slice(0, 3);
     let oldNotes = [];
     try {
@@ -463,6 +468,15 @@
       '<div class="weekly-grid"><section><h3>让我开心 / 放松</h3><p>' + happyText + '</p></section><section><h3>比较消耗的事</h3><p>' + frictionText + '</p></section><section><h3>工作里出现的卡点</h3><p>' + blockerText + '</p></section><section><h3>生活里出现过</h3><p>' + lifeSignals + '</p></section></div>' +
       pattern + '<div class="weekly-experiment"><span>下周只试一件事</span><p>' + experiment + '</p></div>';
   }
+  function renderWorkTakeaways() {
+    const target = $("#work-takeaway-list");
+    const days = workLogs.filter((item) => takeawayItems(item.takeaway).length).sort((a, b) => b.date.localeCompare(a.date));
+    if (!days.length) {
+      target.innerHTML = '<p class="takeaway-empty">还没有工作收获。想记的时候，在工作页每行写一条即可。</p>';
+      return;
+    }
+    target.innerHTML = days.map((item) => '<section class="takeaway-day"><time datetime="' + escapeHTML(item.date) + '">' + escapeHTML(shortDate(item.date)) + '</time><ul>' + takeawayItems(item.takeaway).map((line) => '<li>' + escapeHTML(line) + '</li>').join("") + '</ul></section>').join("");
+  }
   function renderMy() {
     renderEvents();
     renderTodos();
@@ -487,6 +501,7 @@
       date: item.date,
       mood: ["不错", "一般", "稍差", "很差"].includes(item.mood) ? item.mood : "",
       good: String(item.good || "").slice(0, 1200),
+      takeaway: String(item.takeaway || "").slice(0, 1600),
       stress: String(item.stress || "").slice(0, 1200),
       hasBlocker: Boolean(item.hasBlocker),
       blocker: String(item.blocker || "").slice(0, 1600),
