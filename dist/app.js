@@ -1,6 +1,31 @@
 (() => {
   "use strict";
 
+  const isNativeApp = (() => {
+    try {
+      if (window.Capacitor?.isNativePlatform?.()) return true;
+    } catch (_) {}
+    if (window.location.protocol === "capacitor:") return true;
+    return ["localhost", "127.0.0.1"].includes(window.location.hostname) && /Android/i.test(navigator.userAgent || "");
+  })();
+
+  function removeNativeServiceWorker() {
+    if (!isNativeApp || !("serviceWorker" in navigator)) return Promise.resolve(true);
+    return navigator.serviceWorker.getRegistrations().then(async (registrations) => {
+      const reloadKey = "shiguang.native-service-worker-cleanup";
+      const hadController = Boolean(navigator.serviceWorker.controller);
+      await Promise.all(registrations.map((registration) => registration.unregister()));
+      if ((registrations.length || hadController) && !sessionStorage.getItem(reloadKey)) {
+        sessionStorage.setItem(reloadKey, "1");
+        window.location.reload();
+        return false;
+      }
+      if (!registrations.length && !navigator.serviceWorker.controller) sessionStorage.removeItem(reloadKey);
+      return true;
+    }).catch(() => true);
+  }
+  let nativeServiceWorkerCleanup = Promise.resolve(true);
+
   const STORAGE_KEY = "shiguang.entries.v1";
   const PHOTO_DB_NAME = "shiguang-note-images-v1";
   const MOODS = {
@@ -499,6 +524,7 @@
 
   async function exportBackup() {
     try {
+      if (!(await nativeServiceWorkerCleanup)) return;
       const exportedEntries = await Promise.all(sortedNewest().map(async (entry) => ({
         ...entry,
         photos: await Promise.all((Array.isArray(entry.photos) ? entry.photos : []).map(async (photo) => {
@@ -530,7 +556,8 @@
       if (error?.code === "SAVE_CANCELLED" || /cancel|取消/i.test(error?.message || "")) {
         showToast("你取消了保存，备份没有写入。", 4500);
       } else {
-        showToast("备份没有保存，请重新选择“下载”目录后重试。", 5000);
+        const detail = [String(error?.code || "").trim(), String(error?.message || "").trim()].filter(Boolean).join("：").slice(0, 140);
+        showToast(detail ? `备份失败：${detail}` : "备份失败，请重试。", 6500);
       }
     }
   }
@@ -664,7 +691,6 @@
   $("#import-data").addEventListener("click", () => $("#import-file").click());
   $("#import-file").addEventListener("change", (event) => { const [file] = event.target.files || []; if (file) importBackup(file); });
   const installButton = $("#install-app");
-  const isNativeApp = Boolean(window.Capacitor?.isNativePlatform?.());
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
   installButton.hidden = isNativeApp || !/android/i.test(navigator.userAgent) || isStandalone;
   window.addEventListener("beforeinstallprompt", (event) => {
@@ -688,5 +714,6 @@
 
   renderAll();
   Promise.resolve(navigator.storage?.persist?.()).catch(() => {});
-  if (!isNativeApp && "serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
+  if (isNativeApp) nativeServiceWorkerCleanup = removeNativeServiceWorker();
+  else if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
 })();
