@@ -56,6 +56,8 @@ jobs:
         run: node scripts/configure-android-signing.mjs
       - name: Build installable APK
         working-directory: android
+        env:
+          SHIGUANG_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.SHIGUANG_ANDROID_KEYSTORE_PASSWORD }}
         run: ./gradlew --no-daemon assembleDebug
       - name: Add APK to site downloads
         run: mkdir -p dist && cp android/app/build/outputs/apk/debug/app-debug.apk dist/shiguangbiji.apk
