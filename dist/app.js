@@ -511,9 +511,9 @@
       const filename = `拾光笔记备份-${todayKey()}.json`;
       const backupText = JSON.stringify(backup, null, 2);
       if (window.ShiguangBackupTransport?.isAndroidApp()) {
-        if (!window.confirm("将打开安卓系统分享面板。请选择“保存到设备”或自己的云盘，并完成保存；仅打开面板还不算备份。继续吗？")) return;
-        await window.ShiguangBackupTransport.shareFile(filename, backupText);
-        showToast("分享流程已结束。请到文件管理或云盘确认 JSON 文件确实存在；如果取消了分享，请重新导出。", 6000);
+        if (!window.confirm("将打开安卓系统文件保存窗口。建议选择“下载”目录，这样浏览器导入时容易找到。保存完成前不要关闭应用。继续吗？")) return;
+        await window.ShiguangBackupTransport.saveFile(filename, backupText);
+        showToast(`备份文件已写入所选位置：${filename}`, 6000);
         return;
       }
       const blob = new Blob([backupText], { type: "application/json;charset=utf-8" });
@@ -527,7 +527,11 @@
       setTimeout(() => URL.revokeObjectURL(url), 1000);
       showToast("已发起备份下载。请在浏览器下载列表中确认 JSON 文件存在。", 5000);
     } catch (error) {
-      showToast(error instanceof Error ? `备份没有完成：${error.message}` : "备份没有完成，请重试。", 5000);
+      if (error?.code === "SAVE_CANCELLED" || /cancel|取消/i.test(error?.message || "")) {
+        showToast("你取消了保存，备份没有写入。", 4500);
+      } else {
+        showToast("备份没有保存，请重新选择“下载”目录后重试。", 5000);
+      }
     }
   }
 

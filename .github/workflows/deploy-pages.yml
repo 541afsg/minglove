@@ -43,6 +43,8 @@ jobs:
         run: node scripts/generate-android-icons.mjs
       - name: Create Android project
         run: npx cap add android
+      - name: Register Android backup file picker
+        run: node scripts/install-android-backup-plugin.mjs
       - name: Generate Android app icons
         run: npx capacitor-assets generate --android
       - name: Sync web app into Android project
@@ -61,4 +63,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
