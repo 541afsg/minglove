@@ -414,7 +414,10 @@
       const value = Array.isArray(activityPool[group]) ? activityPool[group] : POOL_DEFAULTS[group];
       normalized[group] = [...new Set(value.filter((x) => typeof x === "string").map((x) => x.trim()).filter(Boolean).slice(0, 60))];
     });
+    const removedLegacyRelaxation = normalized["放松"].includes("按摩 / 足疗");
+    normalized["放松"] = normalized["放松"].filter((name) => name !== "按摩 / 足疗");
     activityPool = normalized;
+    if (removedLegacyRelaxation) writeJSON(KEYS.pool, activityPool);
   }
   function renderPool() {
     normalizePool();
