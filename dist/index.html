@@ -26,7 +26,38 @@
       </header>
 
       <main>
+        <section class="screen work-screen" id="screen-work" data-screen="work" aria-labelledby="work-title" hidden>
+          <div class="page-heading"><div><p class="eyebrow">A SOFTER END TO YOUR WORKDAY</p><h1 id="work-title">把工作收好</h1><p class="page-subtitle" id="work-date-label">先记下今天的状态，再把下一步放好。</p></div><span class="page-ornament" aria-hidden="true">↘</span></div>
+          <section class="work-card">
+            <div class="work-card-heading"><div><p class="eyebrow">TODAY AT WORK</p><h2>今天的状态</h2></div><span class="work-private-note">只保存在这台设备</span></div>
+            <div class="work-mood-picker" id="work-moods" role="radiogroup" aria-label="选择今天的工作状态"><button type="button" data-work-mood="不错" aria-pressed="false">不错</button><button type="button" data-work-mood="一般" aria-pressed="false">一般</button><button type="button" data-work-mood="稍差" aria-pressed="false">稍差</button><button type="button" data-work-mood="很差" aria-pressed="false">很差</button></div>
+            <p class="work-prompt" id="work-prompt">今天哪里比较顺？有需要带到明天的事吗？</p>
+            <form id="work-form">
+              <input id="work-date" type="date" aria-label="工作记录日期" required />
+              <label class="field-label" for="work-good">今天哪里比较顺？<span>可选</span></label><textarea id="work-good" rows="2" maxlength="1200" placeholder="一件做得不错的事就够了"></textarea>
+              <label class="field-label" for="work-stress">哪里让我烦、累或焦虑？<span>可选</span></label><textarea id="work-stress" rows="2" maxlength="1200" placeholder="可以先写关键词"></textarea>
+              <label class="work-check"><input id="work-has-blocker" type="checkbox" /> 今天有还卡着的事</label>
+              <div id="work-blocker-fields" hidden>
+                <label class="field-label" for="work-blocker">当前状态 / 具体卡点</label><textarea id="work-blocker" rows="3" maxlength="1600" placeholder="例如：方案已经整理好，在等对方确认排期"></textarea>
+                <div class="form-grid"><div class="form-row"><label class="field-label" for="work-next">下一步最小动作</label><input id="work-next" type="text" maxlength="220" placeholder="明早先发消息确认"></div><div class="form-row"><label class="field-label" for="work-next-when">什么时候再处理</label><input id="work-next-when" type="text" maxlength="120" placeholder="明天上午 / 等回复后"></div></div>
+                <div class="form-grid"><div class="form-row"><label class="field-label" for="work-waiting">目前属于</label><select id="work-waiting"><option value="self">我可以继续处理</option><option value="reply">等别人回复</option><option value="leader">需要找领导确认</option><option value="tomorrow">明天继续</option><option value="none">暂时无动作可做</option></select></div><div class="form-row"><label class="field-label" for="work-tonight">今晚还需要继续吗？</label><select id="work-tonight"><option value="no">不需要，先放下</option><option value="yes">需要，我还会处理</option></select></div></div>
+              </div>
+              <div class="work-actions"><button class="button button-secondary" type="button" id="work-save">保存今天的工作记录</button><button class="button button-primary" type="button" id="finish-work">今天工作结束 <span aria-hidden="true">→</span></button></div>
+            </form>
+            <section class="work-closed-card" id="work-closed-card" hidden><p class="eyebrow">WORK IS WRAPPED UP</p><h2>今天已经收尾</h2><p id="work-closure-copy"></p><button class="text-button" type="button" id="work-edit-after-close">查看 / 修改今天的记录</button></section>
+          </section>
+          <section class="let-go-card"><div><p class="eyebrow">PUT IT DOWN FOR NOW</p><h2>放下这件事</h2><p>把卡点、下一步和再处理的时间写清楚，先停在这里。</p></div><button class="button button-secondary" type="button" id="open-let-go">整理一下 <span aria-hidden="true">→</span></button></section>
+        </section>
+
         <section class="screen is-active" id="screen-today" data-screen="today" aria-labelledby="welcome-title">
+          <section class="life-mode-banner" id="life-mode-banner"><span class="life-banner-mark" aria-hidden="true">☼</span><div><strong id="life-banner-title">今天想怎么过？</strong><p id="life-banner-copy">先从一个轻松的选择开始，或者什么也不安排。</p></div></section>
+          <section class="life-context-card"><div class="life-context-heading"><div><p class="eyebrow">A LITTLE SPACE FOR YOURSELF</p><h2 id="life-context-title">现在的你</h2></div><span class="soft-count">不必精确</span></div>
+            <div class="life-context-fields"><label>大概到家时间<input id="life-arrival" type="time" aria-label="大概到家时间，可选" /></label><label>当前精力<select id="life-energy"><option value="low">偏低</option><option value="medium" selected>中等</option><option value="high">比较好</option></select></label><label>今晚更想<select id="life-wish"><option value="any">随意 / 不确定</option><option value="quiet">安静</option><option value="active">活动</option><option value="social">社交</option></select></label></div>
+            <label class="work-check body-rest-check"><input id="life-unwell" type="checkbox" /> 身体明显不舒服，休息优先</label>
+            <div class="weekend-intent" id="weekend-intent" hidden><p>今天想怎么过？</p><div class="intent-options"><button type="button" data-intent="随意一点">随意一点</button><button type="button" data-intent="想出去走走">想出去走走</button><button type="button" data-intent="想运动">想运动</button><button type="button" data-intent="想社交">想社交</button><button type="button" data-intent="安静休息">想安静休息</button><button type="button" data-intent="已经有安排">今天已有安排</button><button type="button" data-intent="暂时不知道">暂时不知道</button></div></div>
+            <div class="recommendations" id="life-recommendations" aria-live="polite"></div>
+          </section>
+          <section class="life-activity-section"><div class="section-heading"><div><p class="eyebrow">LIFE, AT YOUR OWN PACE</p><h2>今天的生活 <span class="soft-count" id="activity-count">0</span></h2></div><button class="button button-secondary" type="button" id="open-activity">＋ 记录一项生活</button></div><p class="page-subtitle">一天可以记几件小事。运动、散步或和朋友见面，都只是生活的一部分。</p><div id="life-activity-list" class="activity-list"></div></section>
           <div class="today-grid">
             <section class="welcome-card">
               <div class="welcome-art" aria-hidden="true"><span class="sun-disc"></span><svg class="botanical botanical-right" viewBox="0 0 180 250" fill="none"><path d="M116 245C103 176 116 113 161 28" stroke="#748767" stroke-width="2"/><path d="M127 189C91 173 78 153 76 128C105 139 122 158 127 189Z" fill="#879879"/><path d="M137 151C155 128 160 104 152 80C131 99 126 122 137 151Z" fill="#a2ad8c"/><path d="M146 112C119 94 108 73 113 49C137 61 149 82 146 112Z" fill="#768969"/><path d="M151 79C165 62 169 44 162 25" stroke="#748767" stroke-width="1.5"/><g fill="#fbf8ef" stroke="#d6c9a7" stroke-width="1"><circle cx="158" cy="35" r="11"/><circle cx="158" cy="35" r="4" fill="#d6b87c"/><circle cx="133" cy="58" r="8"/><circle cx="133" cy="58" r="3" fill="#d6b87c"/></g></svg><svg class="botanical botanical-left" viewBox="0 0 140 190" fill="none"><path d="M8 186C44 137 63 82 72 20" stroke="#718365" stroke-width="2"/><path d="M33 147C12 124 8 103 17 82C36 99 42 120 33 147Z" fill="#8c9979"/><path d="M50 112C79 99 93 80 94 57C68 68 53 86 50 112Z" fill="#a5ad91"/><path d="M63 73C43 57 37 40 44 22C63 34 70 51 63 73Z" fill="#728565"/></svg></div>
@@ -74,7 +105,7 @@
           </section>
         </section>
 
-        <section class="screen" id="screen-calendar" data-screen="calendar" aria-labelledby="calendar-title" hidden>
+        <section class="screen" id="screen-calendar" aria-labelledby="calendar-title" hidden>
           <div class="page-heading"><div><p class="eyebrow">YOUR DAYS, AT A GLANCE</p><h1 id="calendar-title">日历回看</h1><p class="page-subtitle">每个小点，都是你认真生活过的证据。</p></div><span class="page-ornament" aria-hidden="true">✳</span></div>
           <div class="calendar-layout">
             <section class="calendar-card" aria-label="月历">
@@ -88,7 +119,9 @@
         </section>
 
         <section class="screen" id="screen-history" data-screen="history" aria-labelledby="history-title" hidden>
-          <div class="page-heading history-heading"><div><p class="eyebrow">A COLLECTION OF YOU</p><h1 id="history-title">我的拾光</h1><p class="page-subtitle">所有平凡又珍贵的日子，都在这里。</p></div><span class="page-ornament" aria-hidden="true">❋</span></div>
+          <div class="page-heading history-heading"><div><p class="eyebrow">A COLLECTION OF YOUR DAYS</p><h1 id="history-title">时光回顾</h1><p class="page-subtitle">工作和生活各自留痕，在每周回顾里再轻轻看一眼。</p></div><span class="page-ornament" aria-hidden="true">❋</span></div>
+          <section class="weekly-card" id="weekly-summary"><p class="eyebrow">A GENTLE WEEKLY RECAP</p><h2 id="weekly-title">这一周</h2><div id="weekly-content"></div></section>
+          <div class="review-calendar-slot" id="review-calendar-slot"></div>
           <section class="history-tools">
             <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">搜索记录</span><input id="history-search" type="search" placeholder="搜一搜关键词、标题或标签" autocomplete="off" /></label>
             <div class="history-actions"><button class="button button-secondary" type="button" id="export-data"><span aria-hidden="true">↓</span> 导出备份</button><button class="button button-secondary" type="button" id="import-data"><span aria-hidden="true">↑</span> 导入备份</button><input type="file" id="import-file" accept="application/json,.json" hidden /></div>
@@ -100,15 +133,23 @@
           <div id="history-list" class="entry-list history-list"></div>
           <p class="backup-note"><span aria-hidden="true">◈</span> 文字和照片保存在这台手机的浏览器中。定期导出备份，换设备时可以再导入。</p>
         </section>
+
+        <section class="screen" id="screen-my" data-screen="my" aria-labelledby="my-title" hidden>
+          <div class="page-heading"><div><p class="eyebrow">YOUR OWN LITTLE CORNER</p><h1 id="my-title">我的拾光</h1><p class="page-subtitle">重要的日子、生活琐事和喜欢做的事，都收在这里。</p></div><span class="page-ornament" aria-hidden="true">❋</span></div>
+          <section class="my-panel"><div class="my-panel-heading"><div><p class="eyebrow">COUNTING THE DAYS</p><h2>重要的日子</h2></div><button class="button button-secondary" type="button" id="open-event">＋ 添加日期</button></div><div id="event-list" class="event-list"></div></section>
+          <section class="my-panel"><div class="my-panel-heading"><div><p class="eyebrow">SMALL THINGS, ONE STEP AT A TIME</p><h2>生活待办</h2></div><span class="soft-count">先写最小动作</span></div><form id="todo-form" class="todo-form"><input id="todo-title" type="text" maxlength="120" placeholder="要处理的生活小事" aria-label="生活待办名称" required /><input id="todo-next" type="text" maxlength="180" placeholder="下一步最小动作，例如：先找出银行卡" aria-label="下一步最小动作" required /><button class="button button-primary" type="submit">收下</button></form><div id="todo-list" class="todo-list"></div></section>
+          <section class="my-panel"><div class="my-panel-heading"><div><p class="eyebrow">YOUR ACTIVITY SHELF</p><h2>生活活动池</h2></div><span class="soft-count">随时可以增删</span></div><form id="pool-form" class="pool-form"><select id="pool-group" aria-label="活动分类"><option>安静</option><option>身体活动</option><option>社交</option><option>放松</option><option>探索</option></select><input id="pool-name" type="text" maxlength="50" placeholder="添加一种你喜欢的活动" aria-label="新活动名称" required /><button class="button button-secondary" type="submit">添加</button></form><div id="pool-list" class="pool-list"></div></section>
+          <section class="my-panel backup-panel"><div><p class="eyebrow">YOUR DATA STAYS HERE</p><h2>本机保存与备份</h2><p>日记、照片、工作和生活数据保存在这台设备。导出备份后，可在换设备时导入。</p></div><div class="history-actions"><button class="button button-secondary" type="button" id="my-export-data">导出完整备份</button><button class="button button-secondary" type="button" id="my-import-data">导入备份</button></div></section>
+        </section>
       </main>
 
       <button class="floating-add" id="floating-add" type="button" aria-label="新建生活记录">＋</button>
       <nav class="bottom-nav" aria-label="主导航">
-        <button class="nav-item is-active" type="button" data-nav="today" aria-current="page"><span class="nav-icon" aria-hidden="true">▤</span><span>记录</span></button>
-        <button class="nav-item" type="button" data-nav="calendar"><span class="nav-icon" aria-hidden="true">▦</span><span>日历</span></button>
+        <button class="nav-item" type="button" data-nav="work"><span class="nav-icon" aria-hidden="true">↘</span><span>工作</span></button>
+        <button class="nav-item is-active" type="button" data-nav="today" aria-current="page"><span class="nav-icon" aria-hidden="true">☼</span><span>生活</span></button>
         <button class="nav-add" type="button" id="nav-add" aria-label="新建记录"><span aria-hidden="true">＋</span></button>
-        <button class="nav-item" type="button" data-nav="history"><span class="nav-icon" aria-hidden="true">◎</span><span>我的</span></button>
-        <span class="nav-spacer" aria-hidden="true"></span>
+        <button class="nav-item" type="button" data-nav="history"><span class="nav-icon" aria-hidden="true">◷</span><span>回顾</span></button>
+        <button class="nav-item" type="button" data-nav="my"><span class="nav-icon" aria-hidden="true">◎</span><span>我的</span></button>
       </nav>
     </div>
 
@@ -121,12 +162,16 @@
         <div class="form-grid"><div class="form-row"><label class="field-label" for="entry-category">分类</label><select id="entry-category" name="category"><option>日常</option><option>心情</option><option>灵感</option><option>重要时刻</option></select></div><div class="form-row"><label class="field-label" for="entry-mood">心情</label><select id="entry-mood" name="mood"><option value="">暂不选择</option><option value="happy">开心 ☀️</option><option value="calm">平静 🌿</option><option value="full">充实 ✨</option><option value="tired">疲惫 ☁️</option><option value="low">低落 🌧️</option></select></div></div>
         <div class="form-row"><label class="field-label" for="entry-tags">标签 <span>用逗号分开</span></label><input id="entry-tags" name="tags" type="text" maxlength="120" placeholder="散步，家人，周末" /></div>
         <div class="form-grid"><div class="form-row"><label class="field-label" for="entry-place">地点 <span>可选</span></label><input id="entry-place" name="place" type="text" maxlength="60" placeholder="例如：杭州 · 西湖" /></div><div class="form-row"><label class="field-label" for="entry-weather">天气 <span>可选</span></label><select id="entry-weather" name="weather"><option value="">暂不选择</option><option value="晴">晴 ☀️</option><option value="多云">多云 ⛅</option><option value="阴">阴 ☁️</option><option value="雨">雨 🌧️</option><option value="雪">雪 ❄️</option></select></div></div>
-        <div class="form-row photo-field"><span class="field-label">照片 <span>最多 6 张，自动压缩</span></span><label class="photo-dropzone" for="entry-photos"><span class="photo-drop-icon" aria-hidden="true">＋</span><span><strong>添加生活照片</strong><small>从相册选择，也可以直接拍摄</small></span><input id="entry-photos" name="photos" type="file" accept="image/*" capture="environment" multiple /></label><div class="photo-preview" id="photo-preview"></div></div>
+        <div class="form-row photo-field"><span class="field-label">照片 <span>最多 6 张，自动压缩</span></span><label class="photo-dropzone" for="entry-photos"><span class="photo-drop-icon" aria-hidden="true">＋</span><span><strong>从手机相册选择照片</strong><small>只读取你选中的图片，压缩后保存在本机</small></span><input id="entry-photos" name="photos" type="file" accept="image/*" multiple /></label><div class="photo-preview" id="photo-preview"></div></div>
         <div class="dialog-actions"><button class="button button-secondary" type="button" data-close-dialog>先不记了</button><button class="button button-primary" type="submit">保存这段记忆 <span aria-hidden="true">↗</span></button></div>
       </form>
     </dialog>
     <dialog id="photo-viewer" class="photo-viewer" aria-label="照片预览"><button type="button" class="photo-viewer-close" id="close-photo-viewer" aria-label="关闭照片预览">×</button><img id="photo-viewer-image" alt="记录中的生活照片" /></dialog>
+    <dialog id="activity-dialog" class="entry-dialog" aria-labelledby="activity-dialog-title"><form id="activity-form" class="entry-form"><div class="dialog-heading"><div><p class="eyebrow">A MOMENT OUTSIDE WORK</p><h2 id="activity-dialog-title">记录一项生活</h2></div><button class="icon-button" type="button" data-close-activity aria-label="关闭">×</button></div><div class="form-row"><label class="field-label" for="activity-date">日期</label><input id="activity-date" type="date" required /></div><div class="form-row"><label class="field-label" for="activity-name">做了什么</label><input id="activity-name" type="text" list="activity-options" maxlength="60" placeholder="散步、看电影、和朋友聊天……" required /><datalist id="activity-options"></datalist></div><div class="form-grid"><div class="form-row"><label class="field-label" for="activity-time">大概时间 <span>可选</span></label><input id="activity-time" type="time" /></div><div class="form-row"><label class="field-label" for="activity-who">和谁</label><select id="activity-who"><option>一个人</option><option>朋友</option><option>同事</option><option>家人</option><option>新认识的人</option><option>不记录</option></select></div></div><div class="form-row"><label class="field-label" for="activity-feeling">简单感受</label><select id="activity-feeling"><option>开心</option><option>放松</option><option>普通</option><option>很充实</option><option>有活力</option><option>自由自在</option><option>有点累</option><option>有点无聊</option></select></div><label class="work-check"><input id="activity-is-sport" type="checkbox" /> 这是一次运动（可选记录时长和距离）</label><div class="form-grid sport-metrics" id="sport-metrics" hidden><div class="form-row"><label class="field-label" for="activity-duration">时长（分钟）</label><input id="activity-duration" type="number" min="1" max="1440" inputmode="numeric" placeholder="例如 30" /></div><div class="form-row"><label class="field-label" for="activity-distance">距离（公里）</label><input id="activity-distance" type="number" min="0" max="1000" step="0.1" inputmode="decimal" placeholder="可选" /></div></div><div class="form-row"><label class="field-label" for="activity-note">一句话记录 <span>可选</span></label><textarea id="activity-note" rows="3" maxlength="700" placeholder="留下一点今天的感受"></textarea></div><div class="dialog-actions"><button class="button button-secondary" type="button" data-close-activity>先不记了</button><button class="button button-primary" type="submit">保存这段生活</button></div></form></dialog>
+    <dialog id="event-dialog" class="entry-dialog" aria-labelledby="event-dialog-title"><form id="event-form" class="entry-form"><div class="dialog-heading"><div><p class="eyebrow">A DATE THAT MATTERS</p><h2 id="event-dialog-title">记下一个重要日子</h2></div><button class="icon-button" type="button" data-close-event aria-label="关闭">×</button></div><div class="form-row"><label class="field-label" for="event-name">这一天是什么</label><input id="event-name" type="text" maxlength="80" placeholder="例如：加入公司" required /></div><div class="form-grid"><div class="form-row"><label class="field-label" for="event-date">日期</label><input id="event-date" type="date" required /></div><div class="form-row"><label class="field-label" for="event-kind">怎么计算</label><select id="event-kind"><option value="past">从这天起已经过了多少天</option><option value="future">离这天还有多少天</option></select></div></div><div class="dialog-actions"><button class="button button-secondary" type="button" data-close-event>取消</button><button class="button button-primary" type="submit">保存日期</button></div></form></dialog>
+    <dialog id="let-go-dialog" class="entry-dialog" aria-labelledby="let-go-title"><form id="let-go-form" class="entry-form"><div class="dialog-heading"><div><p class="eyebrow">A SMALL PAUSE</p><h2 id="let-go-title">放下这件事</h2></div><button class="icon-button" type="button" data-close-let-go aria-label="关闭">×</button></div><div class="form-row"><label class="field-label" for="let-go-blocker">现在卡在哪里？</label><textarea id="let-go-blocker" rows="2" maxlength="1000" required></textarea></div><div class="form-row"><label class="field-label" for="let-go-next">下一步动作是什么？</label><input id="let-go-next" type="text" maxlength="180" required /></div><div class="form-row"><label class="field-label" for="let-go-when">什么时候再处理？</label><input id="let-go-when" type="text" maxlength="100" placeholder="明天上午 / 等对方回复后" required /></div><label class="work-check"><input id="let-go-can-act" type="checkbox" /> 现在还有我能做的事</label><p class="let-go-result" id="let-go-result" hidden></p><div class="dialog-actions"><button class="button button-secondary" type="button" data-close-let-go>稍后再说</button><button class="button button-primary" type="submit">整理好，先放下</button></div></form></dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="./app.js" defer></script>
+    <script src="./life-mode.js" defer></script>
   </body>
 </html>

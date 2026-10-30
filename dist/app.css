@@ -575,3 +575,181 @@ main { padding-top: 22px; }
 @media (prefers-reduced-motion: reduce) {
   .entry-card, .entry-photo img, .floating-add, .button { transition: none; }
 }
+
+/* Work / life separation and low-pressure daily tools */
+.work-screen, #screen-my, #screen-history { padding-bottom: 12px; }
+.work-screen .page-heading, #screen-my .page-heading { margin: 12px 0 22px; }
+.work-card, .my-panel, .weekly-card, .life-context-card {
+  border: 1px solid rgba(123, 114, 91, .14);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .94);
+  box-shadow: 0 8px 26px rgba(65, 66, 49, .055);
+  padding: 22px;
+}
+.work-card { max-width: 740px; margin: 0 auto; }
+.work-card-heading, .my-panel-heading, .life-context-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.work-card-heading h2, .my-panel h2, .life-context-card h2, .weekly-card h2, .let-go-card h2 { margin: 0; color: #304237; font-family: "Songti SC", "STSong", serif; font-size: 21px; font-weight: 500; }
+.work-private-note, .work-prompt, .life-context-card .soft-count { color:#929184; font-size:11px; }
+.work-mood-picker { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:17px 0 11px; }
+.work-mood-picker button, .intent-options button {
+  min-height:42px; border:1px solid #e9e5db; border-radius:11px; background:#faf8f2; color:#77796f; cursor:pointer; font:inherit;
+}
+.work-mood-picker button.is-selected, .intent-options button.is-selected { border-color:#8eaf8e; background:#eaf2e7; color:#496b51; box-shadow:0 3px 10px rgba(84,126,89,.08); }
+.work-prompt { margin:0 0 17px; border-radius:10px; background:#f4f5ed; padding:11px 13px; line-height:1.7; }
+#work-form { display:grid; gap:8px; }
+#work-form > input[type="date"] { width:max-content; min-height:36px; margin:0 0 4px; border:1px solid #e9e7df; border-radius:9px; background:#fff; padding:0 10px; color:var(--ink); font:inherit; }
+#work-form textarea, #work-form input[type="text"], #work-form select, .life-context-fields input, .life-context-fields select {
+  width:100%; min-height:40px; border:1px solid #e9e7df; border-radius:10px; background:#fffefa; padding:9px 11px; color:var(--ink); font:inherit;
+}
+#work-form textarea { min-height:72px; resize:vertical; line-height:1.65; }
+#work-form .field-label { margin-top:7px; }
+.work-check { display:flex; align-items:center; gap:8px; margin:8px 0 11px; color:#6b756a; font-size:12px; cursor:pointer; }
+.work-check input { width:17px; height:17px; accent-color:#669477; }
+#work-blocker-fields { border-left:2px solid #c9d8c5; margin:3px 0 5px; padding-left:15px; }
+.work-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:9px; margin-top:12px; }
+.work-closed-card { margin-top:17px; border-radius:13px; background:linear-gradient(140deg,#f3f5ed,#f9f6ed); padding:17px; }
+.work-closed-card h2 { margin:0 0 8px; color:#46664d; font-family:"Songti SC","STSong",serif; font-size:20px; font-weight:500; }
+.work-closed-card p:not(.eyebrow) { margin:0 0 13px; color:#5f6d60; font-size:12px; line-height:1.8; white-space:pre-line; }
+.let-go-card { max-width:740px; display:flex; align-items:center; justify-content:space-between; gap:18px; margin:14px auto 0; border:1px solid rgba(123,114,91,.11); border-radius:16px; background:rgba(248,246,238,.84); padding:17px 20px; }
+.let-go-card p:not(.eyebrow) { margin:7px 0 0; color:#89877d; font-size:11px; line-height:1.6; }
+.life-mode-banner { display:flex; align-items:center; gap:13px; margin:0 0 12px; border:1px solid rgba(117,155,120,.17); border-radius:15px; background:linear-gradient(120deg,rgba(235,244,232,.94),rgba(250,247,237,.93)); padding:14px 17px; }
+.life-banner-mark { width:35px; height:35px; display:grid; flex:none; place-items:center; border-radius:12px; background:#e0eddf; color:#628b70; font-size:21px; }
+.life-mode-banner strong { color:#45694e; font-family:"Songti SC","STSong",serif; font-size:15px; font-weight:500; }
+.life-mode-banner p { margin:4px 0 0; color:#84877a; font-size:10px; line-height:1.6; }
+.life-context-card { margin:0 0 19px; padding:18px 20px; }
+.life-context-heading { margin-bottom:14px; }
+.life-context-card h2 { font-size:18px; }
+.life-context-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.life-context-fields label { display:grid; gap:6px; color:#777c70; font-size:10px; }
+.life-context-fields input, .life-context-fields select { min-height:37px; font-size:11px; }
+.body-rest-check { margin:12px 0 4px; }
+.weekend-intent { margin-top:14px; border-top:1px solid #efede5; padding-top:13px; }
+.weekend-intent > p { margin:0 0 9px; color:#6d786d; font-size:11px; }
+.intent-options { display:flex; flex-wrap:wrap; gap:6px; }
+.intent-options button { min-height:32px; padding:0 10px; font-size:10px; }
+.recommendations { margin-top:13px; }
+.recommendation-heading { display:flex; align-items:center; gap:9px; color:#56745d; font-size:11px; }
+.recommendation-heading small { color:#a09d91; font-size:9px; }
+.recommendation-chips { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:8px; }
+.recommendation-chip { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:39px; border:1px solid #e7eadf; border-radius:10px; background:#f7f8f1; padding:7px 10px; color:#59745e; cursor:pointer; text-align:left; font-size:10px; }
+.recommendation-chip small { color:#a3a495; font-size:9px; white-space:nowrap; }
+.recommendation-note { margin:0; border-radius:9px; background:#f7f5ed; padding:10px 12px; color:#929084; font-size:10px; line-height:1.7; }
+.life-activity-section { margin:0 0 25px; }
+.life-activity-section .section-heading { align-items:flex-end; }
+.life-activity-section .section-heading .button { flex:none; }
+.life-activity-section > .page-subtitle { margin:-4px 0 12px; font-size:10px; }
+.activity-list, .event-list, .todo-list { display:grid; gap:9px; }
+.activity-card { display:grid; grid-template-columns:38px minmax(0,1fr) auto; align-items:start; gap:10px; border:1px solid rgba(128,112,82,.12); border-radius:13px; background:rgba(255,254,250,.93); padding:12px; }
+.activity-symbol { width:34px; height:34px; display:grid; place-items:center; border-radius:11px; background:#edf3e8; color:#6c9472; font-size:18px; }
+.activity-body { min-width:0; }
+.activity-title-row { display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
+.activity-title-row h3, .event-copy h3 { margin:0; color:#3c5342; font-family:"Songti SC","STSong",serif; font-size:14px; font-weight:500; }
+.activity-group { border-radius:20px; background:#f1f1e9; padding:3px 7px; color:#8a927f; font-size:9px; }
+.activity-body > p { margin:6px 0; color:#787a70; font-size:11px; line-height:1.6; overflow-wrap:anywhere; }
+.activity-meta-row { display:flex; flex-wrap:wrap; gap:6px 10px; color:#a09f92; font-size:9px; }
+.activity-tools, .event-tools { display:flex; gap:3px; }
+.activity-tools button, .event-tools button, .todo-card > button, .pool-chip button { width:27px; height:27px; border:0; border-radius:8px; background:transparent; color:#9a9c90; cursor:pointer; font-size:15px; }
+.activity-tools button:hover, .event-tools button:hover, .todo-card > button:hover, .pool-chip button:hover { background:#f0f1e9; color:#53735a; }
+.activity-empty, .event-empty, .todo-empty { border:1px dashed #e4e3d8; border-radius:12px; background:rgba(255,253,248,.65); padding:15px; color:#9a998f; font-size:10px; line-height:1.7; }
+.weekly-card { margin:0 0 19px; padding:20px; }
+.weekly-card h2 { margin:3px 0 14px; font-size:20px; }
+.weekly-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+.weekly-grid section { border-radius:11px; background:#f7f6ef; padding:11px 12px; }
+.weekly-grid h3 { margin:0 0 6px; color:#71806e; font-size:10px; font-weight:500; }
+.weekly-grid p, .weekly-empty { margin:0; color:#77796f; font-size:10px; line-height:1.7; }
+.weekly-pattern { margin:10px 0 0; border-left:2px solid #b9c9a7; padding:5px 0 5px 10px; color:#74796d; font-size:10px; line-height:1.7; }
+.weekly-pattern span, .weekly-experiment > span { display:block; margin-bottom:3px; color:#7f9878; font-size:9px; letter-spacing:.04em; }
+.weekly-experiment { margin-top:11px; border-radius:12px; background:#edf3e8; padding:11px 13px; }
+.weekly-experiment p { margin:0; color:#557057; font-size:10px; line-height:1.7; }
+.review-calendar-slot { margin-bottom:17px; }
+.review-calendar-slot #screen-calendar { display:block; }
+.review-calendar-slot .page-heading { margin:0 0 12px; }
+#screen-my .my-panel { margin-bottom:13px; }
+#screen-my .my-panel h2 { font-size:18px; }
+.event-card { display:grid; grid-template-columns:49px minmax(0,1fr) auto; align-items:center; gap:11px; border:1px solid #ece7db; border-radius:13px; background:#fffefa; padding:10px 12px; }
+.event-count { width:45px; height:45px; display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:12px; background:#edf3e8; color:#5d8063; }
+.event-count strong { font-family:Georgia,serif; font-size:18px; font-weight:400; line-height:1; }
+.event-count span { margin-top:3px; color:#90a08b; font-size:8px; }
+.event-copy { min-width:0; }
+.event-copy h3 { font-size:13px; }
+.event-copy p { margin:5px 0 0; color:#96958a; font-size:9px; }
+.todo-form, .pool-form { display:grid; grid-template-columns:minmax(100px,.8fr) minmax(130px,1.3fr) auto; gap:7px; margin:14px 0 10px; }
+.todo-form input, .pool-form input, .pool-form select { min-width:0; height:38px; border:1px solid #e8e5db; border-radius:9px; background:#fffefa; padding:0 10px; color:var(--ink); font:inherit; font-size:10px; }
+.todo-form .button, .pool-form .button { min-height:38px; padding:0 13px; font-size:10px; }
+.todo-card { display:flex; align-items:center; justify-content:space-between; gap:10px; border-bottom:1px solid #efede5; padding:8px 3px; }
+.todo-card label { display:flex; align-items:flex-start; gap:9px; min-width:0; cursor:pointer; }
+.todo-card input { margin:2px 0 0; accent-color:#689477; }
+.todo-copy { display:grid; gap:4px; min-width:0; }
+.todo-copy strong { color:#596858; font-size:11px; font-weight:500; }
+.todo-copy small { color:#99988d; font-size:9px; line-height:1.6; }
+.todo-card.is-done .todo-copy { opacity:.52; text-decoration:line-through; }
+.pool-form { grid-template-columns:115px minmax(0,1fr) auto; }
+.pool-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; margin-top:15px; }
+.pool-group h3 { margin:0 0 7px; color:#748570; font-size:10px; font-weight:500; }
+.pool-chips { display:flex; flex-wrap:wrap; gap:6px; }
+.pool-chip { display:flex; align-items:center; gap:3px; border:1px solid #eeeae0; border-radius:20px; background:#faf8f2; padding:2px 4px 2px 9px; color:#888a7f; font-size:9px; }
+.pool-chip button { width:18px; height:18px; font-size:13px; }
+.pool-empty { color:#aaa79b; font-size:9px; }
+.backup-panel { display:flex; align-items:center; justify-content:space-between; gap:15px; }
+.backup-panel p:not(.eyebrow) { max-width:500px; margin:7px 0 0; color:#929084; font-size:10px; line-height:1.7; }
+.let-go-result { white-space:pre-line; border-radius:12px; background:#edf3e8; padding:13px; color:#557057; font-size:11px; line-height:1.8; }
+.sport-metrics { margin-top:10px; }
+.sport-metrics input { width:100%; }
+#work-form[hidden], .sport-metrics[hidden] { display:none; }
+.nav-item { flex:1; width:auto; }
+.nav-add { flex:none; }
+.nav-spacer { display:none; }
+.nav-add[hidden], .floating-add[hidden] { display:none; }
+
+@media (max-width: 760px) {
+  .work-screen .page-heading, #screen-my .page-heading { margin:10px 0 15px; }
+  #screen-today > .life-mode-banner { order:-1; }
+  #screen-today > .life-context-card { order:1; }
+  #screen-today > .life-activity-section { order:2; }
+  #screen-today .compose-card { order:3; }
+  #screen-today .feed-section { order:4; }
+  #screen-today .stat-row { order:5; }
+  .work-card, .my-panel, .weekly-card, .life-context-card { border-radius:15px; padding:15px; }
+  .work-card-heading h2, .my-panel h2, .weekly-card h2, .let-go-card h2 { font-size:18px; }
+  .work-private-note { font-size:9px; }
+  .work-mood-picker { gap:5px; }
+  .work-mood-picker button { min-height:39px; font-size:11px; }
+  .work-actions .button { flex:1; min-height:42px; padding:0 8px; font-size:10px; }
+  .let-go-card { align-items:flex-start; margin-top:11px; padding:14px; }
+  .let-go-card .button { flex:none; min-height:38px; padding:0 9px; font-size:10px; }
+  .life-mode-banner { margin:0 0 10px; padding:11px 12px; }
+  .life-context-card { margin-bottom:14px; }
+  .life-context-fields { grid-template-columns:1fr 1fr; gap:8px; }
+  .life-context-fields label:first-child { grid-column:1 / -1; }
+  .recommendation-chips { grid-template-columns:1fr; }
+  .recommendation-chip { min-height:36px; }
+  .life-activity-section { margin-bottom:18px; }
+  .life-activity-section .section-heading { align-items:center; }
+  .life-activity-section .section-heading h2 { font-size:18px; }
+  .life-activity-section .section-heading .button { min-height:36px; padding:0 9px; font-size:9px; }
+  .activity-card { grid-template-columns:31px minmax(0,1fr) auto; gap:7px; padding:10px 8px; }
+  .activity-symbol { width:29px; height:29px; border-radius:9px; font-size:15px; }
+  .activity-title-row h3 { font-size:12px; }
+  .activity-tools { flex-direction:column; }
+  .weekly-grid { grid-template-columns:1fr; }
+  .pool-list { grid-template-columns:1fr; gap:11px; }
+  .todo-form { grid-template-columns:1fr; }
+  .pool-form { grid-template-columns:100px minmax(0,1fr) auto; }
+  .backup-panel { align-items:flex-start; flex-direction:column; }
+  .backup-panel .history-actions { width:100%; }
+  .event-card { grid-template-columns:43px minmax(0,1fr) auto; gap:8px; padding:9px; }
+  .event-count { width:40px; height:40px; }
+  .nav-item { width:auto; min-width:0; }
+  .bottom-nav { padding-right:8px; padding-left:8px; }
+  .review-calendar-slot .calendar-layout { grid-template-columns:1fr; }
+  .review-calendar-slot .selected-day-card { padding:16px 10px; }
+}
+@media (max-width: 365px) {
+  .nav-item { font-size:8px; }
+  .nav-icon { font-size:18px; }
+  .nav-add { width:41px; height:41px; }
+  .life-context-fields { grid-template-columns:1fr; }
+  .life-context-fields label:first-child { grid-column:auto; }
+  .pool-form { grid-template-columns:1fr 1fr; }
+  .pool-form select { grid-column:1 / -1; }
+}

@@ -310,6 +310,7 @@
     renderToday();
     renderCalendar();
     renderHistory();
+    window.dispatchEvent(new Event("shiguang:entries-updated"));
   }
 
   function navigate(screen) {
@@ -328,6 +329,7 @@
     if (screen === "calendar") renderCalendar();
     if (screen === "history") renderHistory();
     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.dispatchEvent(new CustomEvent("shiguang:navigate", { detail: { screen } }));
   }
 
   function openEditor(entry = null, seed = {}) {
@@ -504,7 +506,8 @@
           return { ...photo, data: blob ? await blobToDataUrl(blob) : safeImageData(photo.thumbnailData) };
         })),
       })));
-      const backup = { app: "拾光笔记", version: 1, exportedAt: new Date().toISOString(), entries: exportedEntries };
+      const extendedData = window.ShiguangExtended?.backupData?.() || {};
+      const backup = { app: "拾光笔记", version: 2, exportedAt: new Date().toISOString(), entries: exportedEntries, ...extendedData };
       const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
@@ -569,6 +572,7 @@
         }
       }
       if (saveEntries([...added, ...entries])) {
+        await window.ShiguangExtended?.importBackup?.(raw);
         renderAll();
         showToast(`已导入 ${added.length} 篇新记录。` );
       } else await Promise.all(addedPhotoIds.map(deletePhoto));
@@ -588,6 +592,8 @@
   $$('[data-nav="today"]').forEach((button) => button.addEventListener("click", () => navigate("today")));
   $$('[data-nav="calendar"]').forEach((button) => button.addEventListener("click", () => navigate("calendar")));
   $$('[data-nav="history"]').forEach((button) => button.addEventListener("click", () => navigate("history")));
+  $$('[data-nav="work"]').forEach((button) => button.addEventListener("click", () => navigate("work")));
+  $$('[data-nav="my"]').forEach((button) => button.addEventListener("click", () => navigate("my")));
   entryForm.addEventListener("submit", handleSave);
   $$('[data-close-dialog]').forEach((button) => button.addEventListener("click", closeEditor));
   dialog.addEventListener("click", (event) => { if (event.target === dialog) closeEditor(); });
