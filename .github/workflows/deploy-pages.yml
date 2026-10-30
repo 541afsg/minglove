@@ -39,6 +39,8 @@ jobs:
         run: $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
       - name: Install JavaScript dependencies
         run: npm ci
+      - name: Copy Capacitor core runtime for static app
+        run: node scripts/copy-capacitor-runtime.mjs
       - name: Prepare Android app icons
         run: node scripts/generate-android-icons.mjs
       - name: Create Android project

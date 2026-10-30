@@ -1,4 +1,4 @@
-const CACHE_NAME = "shiguang-shell-v9";
+const CACHE_NAME = "shiguang-shell-v10";
 const isNativeAndroidHost = self.location.protocol === "capacitor:" || (
   ["localhost", "127.0.0.1"].includes(self.location.hostname) && /Android/i.test(self.navigator.userAgent || "")
 );
@@ -11,7 +11,7 @@ if (isNativeAndroidHost) {
     await Promise.all(clients.map((client) => client.navigate(client.url).catch(() => null)));
   })()));
 } else {
-  const SHELL = ["./", "./index.html", "./app.css", "./app.js", "./life-mode.js", "./native-backup.js", "./manifest.webmanifest", "./icon.svg?v=2", "./icon-192.png?v=2", "./icon-512.png?v=2"];
+  const SHELL = ["./", "./index.html", "./app.css", "./capacitor.js", "./app.js", "./life-mode.js", "./native-backup.js", "./manifest.webmanifest", "./icon.svg?v=2", "./icon-192.png?v=2", "./icon-512.png?v=2"];
 
   self.addEventListener("install", (event) => {
     event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)));
