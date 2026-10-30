@@ -508,17 +508,27 @@
       })));
       const extendedData = window.ShiguangExtended?.backupData?.() || {};
       const backup = { app: "拾光笔记", version: 2, exportedAt: new Date().toISOString(), entries: exportedEntries, ...extendedData };
-      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json;charset=utf-8" });
+      const filename = `拾光笔记备份-${todayKey()}.json`;
+      const backupText = JSON.stringify(backup, null, 2);
+      if (window.ShiguangBackupTransport?.isAndroidApp()) {
+        if (!window.confirm("将打开安卓系统分享面板。请选择“保存到设备”或自己的云盘，并完成保存；仅打开面板还不算备份。继续吗？")) return;
+        await window.ShiguangBackupTransport.shareFile(filename, backupText);
+        showToast("分享流程已结束。请到文件管理或云盘确认 JSON 文件确实存在；如果取消了分享，请重新导出。", 6000);
+        return;
+      }
+      const blob = new Blob([backupText], { type: "application/json;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `拾光笔记备份-${todayKey()}.json`;
+      anchor.download = filename;
       document.body.append(anchor);
       anchor.click();
       anchor.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      showToast("备份文件已导出，请妥善保存。" );
-    } catch { showToast("备份没有生成成功，请检查浏览器存储权限。", 3600); }
+      showToast("已发起备份下载。请在浏览器下载列表中确认 JSON 文件存在。", 5000);
+    } catch (error) {
+      showToast(error instanceof Error ? `备份没有完成：${error.message}` : "备份没有完成，请重试。", 5000);
+    }
   }
 
   function normalizeBackup(raw) {

@@ -1,5 +1,5 @@
-const CACHE_NAME = "shiguang-shell-v4";
-const SHELL = ["./", "./index.html", "./app.css", "./app.js", "./life-mode.js", "./manifest.webmanifest", "./icon.svg?v=2", "./icon-192.png?v=2", "./icon-512.png?v=2"];
+const CACHE_NAME = "shiguang-shell-v5";
+const SHELL = ["./", "./index.html", "./app.css", "./app.js", "./life-mode.js", "./native-backup.js", "./manifest.webmanifest", "./icon.svg?v=2", "./icon-192.png?v=2", "./icon-512.png?v=2"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL)));
